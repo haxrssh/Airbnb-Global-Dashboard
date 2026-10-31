@@ -1,0 +1,102 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "7ed2d05f441d5b217f55",
+  "position": {
+    "x": 27.109312525746965,
+    "y": 695.4127995735091,
+    "z": 21000,
+    "height": 61.290619623427915,
+    "width": 835.6740252501999,
+    "tabOrder": 21000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "In ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontSize": "10pt",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": "2015",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontSize": "10pt",
+                      "color": "#fe585d"
+                    }
+                  },
+                  {
+                    "value": ", Airbnb reached the ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontSize": "10pt",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": "highest ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontSize": "10pt",
+                      "color": "#fe585d"
+                    }
+                  },
+                  {
+                    "value": "number of new listings, 2016 and 2017 saw a restraint also due to a tightening in local regulations. Despite this, Airbnb became ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontSize": "10pt",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": "profitable ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontSize": "10pt",
+                      "color": "#fe585d"
+                    }
+                  },
+                  {
+                    "value": "in the second half of 2016, and 2017 marked the first year of generating income. From 2018, there was a new growth stopped in 2019 by the ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontSize": "10pt",
+                      "color": "#000000"
+                    }
+                  },
+                  {
+                    "value": "Covid-19",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontSize": "10pt",
+                      "color": "#fe585d"
+                    }
+                  },
+                  {
+                    "value": " pandemic.",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontSize": "10pt",
+                      "color": "#000000"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,26 @@
+# ---- Power BI Project (PBIP) local/user files ----
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+**/.pbi/unappliedChanges.json
+
+# ---- Large binaries: publish the .pbix as a GitHub Release asset instead ----
+# (GitHub rejects files > 100 MB; this one is ~200 MB with data)
+*.pbix
+*.abf
+
+# ---- Raw data: download it, don't commit it (see data/README.md) ----
+data/raw/
+
+# ---- Python ----
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+~$*

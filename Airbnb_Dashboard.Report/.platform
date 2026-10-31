@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Airbnb_Dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "fab93c3b-7632-434f-8926-8d01d929875a"
+  }
+}

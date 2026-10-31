@@ -1,0 +1,108 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "0d22b6fd568ad9cb1a20",
+  "position": {
+    "x": 27.717647058823527,
+    "y": 692.9411764705882,
+    "z": 12000,
+    "height": 59.01176470588235,
+    "width": 904.8470588235294,
+    "tabOrder": 12000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Mexico City ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#fe585d"
+                    }
+                  },
+                  {
+                    "value": "and ",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Rio ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#fe585d"
+                    }
+                  },
+                  {
+                    "value": "are the overall ",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "best rated",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#fe585d"
+                    }
+                  },
+                  {
+                    "value": " cities. ",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "HK",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#fe585d"
+                    }
+                  },
+                  {
+                    "value": " and ",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Istanbul",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#fe585d"
+                    }
+                  },
+                  {
+                    "value": " are the ",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "worst ones",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "color": "#fe585d"
+                    }
+                  },
+                  {
+                    "value": ". Cleanliness and value for money ratio are the two metrics generally scoring the lowest.",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

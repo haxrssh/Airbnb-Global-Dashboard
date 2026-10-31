@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "b8a4f1c6ebd57c4e20f9",
+  "position": {
+    "x": 755,
+    "y": 225.49999237060547,
+    "z": 20000,
+    "height": 22.332614437686285,
+    "width": 102.73002641335691,
+    "tabOrder": 20000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "COVID-19",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontStyle": "italic",
+                      "fontSize": "8pt",
+                      "color": "#000000"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "center"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

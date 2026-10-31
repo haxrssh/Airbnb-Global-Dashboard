@@ -1,0 +1,424 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/2.1.0/schema.json",
+  "displayName": "Detailed",
+  "name": "a29a8185bb41b137ed43",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "6355d977c11c60fe321b",
+      "baafbe31a0b354a9a8be",
+      "cd6f0325deddf782b02b",
+      "98331dc73803ca37b3bc",
+      "02f2fb0d11036cf6c154",
+      "5c1617002a691f1ce5b2",
+      "818adfd1e181dc48f191"
+    ],
+    "suppressActiveSection": true,
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "22c4a7136a9cf37a7dcd",
+    "sections": {
+      "22c4a7136a9cf37a7dcd": {
+        "visualContainers": {
+          "1183c52137e4eed56262": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "8a1947b86886c7e81a4b",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "city"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "baae54ac184663fad33d",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "Superhost Listings"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "c48352c1b2449ba7dbe2",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "No Superhost Listings"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "7dd0d0ebe80ddec52954",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "Cumulative %"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "lineStackedColumnComboChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "Cumulative %"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "city"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "3273e86f58650b22c35f": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "3279fded5636535e50dd": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "45232b6efde626506faf": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "81cacd1be0a64b9ebef7",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "city"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "b8f6fe2a5665e51a2e1e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "Accuracy"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "3917b9de19cabfa78506",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "Cleanliness"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "945222d8f522b027006c",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "location"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "acdeb94757f22bd42be0",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "Value"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "pivotTable",
+              "objects": {},
+              "activeProjections": {
+                "Rows": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "city"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "46dc4b4df3729962903b": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "b90739ccf868b2cf3dec",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "room_type"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "dfbf2962fa604fed1526",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "Avg Price"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "barChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "Avg Price"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "room_type"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "7bb147e514ee71eeee0a": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "9384d3989a28cb50d40e": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "a9abfb6792ab2320594f": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "cd6f0325deddf782b02b": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "f1f19aec275f3843b4da",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "city"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "4d3bb338e1a824c5809e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "Avg Rating"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "columnChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "Avg Rating"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Listings"
+                        }
+                      },
+                      "Property": "city"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "fe864e104d588bec3444": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "0d22b6fd568ad9cb1a20": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+table Reviews
+	lineageTag: 1bb7298c-2b58-4ff3-91e8-9e2f96e6f5e8
+
+	measure Reviewers = DISTINCTCOUNT( Reviews[reviewer_id] )
+		formatString: 0
+		lineageTag: 1e4bccf1-bf2e-453d-864b-f280952e694b
+
+	measure 'Reviews per reviewer' =
+			CALCULATE(
+			    COUNT(Reviews[reviewer_id]),
+			    ALLEXCEPT( Reviews, Reviews[reviewer_id] )
+			)
+		formatString: 0
+		lineageTag: 9f1e0dd4-29f4-4946-8f5c-0e0e07a4ee67
+
+	column listing_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 8fddbe86-8f48-4aa9-927a-696f7b7926d6
+		summarizeBy: none
+		sourceColumn: listing_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_id
+		dataType: int64
+		formatString: 0
+		lineageTag: e1b4582f-448d-435c-b8a3-b62efc98ae9b
+		summarizeBy: sum
+		sourceColumn: review_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c692e6f9-5289-49e6-8290-978475534383
+		summarizeBy: none
+		sourceColumn: date
+
+		variation Variation
+			isDefault
+			relationship: 6b956d38-4dd7-4913-939d-d3d1ade3a9da
+			defaultHierarchy: LocalDateTable_9cc0a161-6f1d-42fc-8b46-cecebed60fc1.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column reviewer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: ff76d707-873d-4117-b3ab-778d551cf5a3
+		summarizeBy: sum
+		sourceColumn: reviewer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Reviews = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "Reviews.csv"),[Delimiter=",", Columns=4, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"listing_id", Int64.Type}, {"review_id", Int64.Type}, {"date", type date}, {"reviewer_id", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table

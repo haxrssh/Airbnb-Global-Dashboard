@@ -1,0 +1,22 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["DataFolder","Reviews","Listings"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Reviews
+ref table Listings
+ref table DateTableTemplate_07fa67f1-a288-4b8b-bc99-d4168b07b354
+ref table LocalDateTable_9cc0a161-6f1d-42fc-8b46-cecebed60fc1
+ref table LocalDateTable_15336349-f7e1-4509-8e31-8da5118bab82
+
+ref cultureInfo en-US
+

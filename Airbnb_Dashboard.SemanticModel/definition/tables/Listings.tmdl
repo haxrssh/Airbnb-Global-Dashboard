@@ -1,0 +1,456 @@
+table Listings
+	lineageTag: 6716d343-105d-4eb8-a9c1-c7b323910469
+
+	measure 'Entire Place' =
+			CALCULATE (
+			    COUNT ( Listings[listing_id] ),
+			     Listings[room_type] = "Entire place"
+			)
+		formatString: 0
+		lineageTag: 6bb48d4c-67b7-412a-b5f4-bcd00941164c
+
+	measure 'Hotel room' =
+			CALCULATE (
+			    COUNT ( Listings[listing_id] ),
+			     Listings[room_type] = "Hotel room"
+			)
+		formatString: 0
+		lineageTag: 89c49962-c0e6-48dd-a09d-f28f0f0582b1
+
+	measure 'Private Room' =
+			CALCULATE (
+			    COUNT ( Listings[listing_id] ),
+			     Listings[room_type] = "Private room"
+			)
+		formatString: 0
+		lineageTag: 3ffd04fb-1224-4d72-948d-788d26367522
+
+	measure 'Shared room' =
+			CALCULATE (
+			    COUNT ( Listings[listing_id] ),
+			     Listings[room_type] = "Shared room"
+			)
+		formatString: 0
+		lineageTag: a69ca84a-966a-4d37-8fa0-56c2b24eb915
+
+	measure 'Total Listings' = DISTINCTCOUNT(Listings[listing_id])
+		formatString: 0
+		lineageTag: 37c0b547-1743-490d-96a5-120d9ca0025c
+
+	measure 'Superhost Listings' =
+			CALCULATE(
+			    COUNT(Listings[listing_id]),
+			    Listings[host_is_superhost] = "t"
+			)
+		formatString: 0
+		lineageTag: b1235b16-1ae4-4d21-bdb3-0453b21fa4e8
+
+	measure 'No Superhost Listings' =
+			CALCULATE(
+			    COUNT(Listings[listing_id]),
+			    Listings[host_is_superhost] = "f"
+			)
+		formatString: 0
+		lineageTag: de74b401-9230-4371-b751-945c8aea4245
+
+	measure 'City Rank' =
+			RANKX (
+			    ALL (Listings[city] ),
+			    [Total Listings],
+			    ,DESC
+			)
+		formatString: 0
+		lineageTag: 34943379-0496-4cca-b76d-b77ef9d154dc
+
+	measure 'Cumulative Listings' =
+			VAR CurrentRank =
+			MAXX ( 
+			    VALUES(Listings[city]),
+			    [City Rank]
+			
+			)
+			RETURN
+			CALCULATE (
+			    [Total Listings],
+			    FILTER(
+			        ALL(Listings[city]),
+			        [City Rank] <= CurrentRank
+			    )
+			)
+		formatString: 0
+		lineageTag: 5ebb0815-f68d-47e1-9745-abf683f2fb8e
+
+	measure 'Cumulative %' =
+			DIVIDE( [Cumulative Listings], CALCULATE([Total Listings], ALL(Listings[city]))
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: e99eac99-f2e9-4d8f-abd3-65697ca11d1e
+
+	measure 'Avg Price' = AVERAGE(Listings[price])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: d9b6f1e9-b955-4e01-8938-738ab47fe637
+
+	measure 'Avg Rating' = AVERAGE( Listings[review_scores_rating] )
+		formatString: 0.0
+		lineageTag: ce2559a8-0887-449d-821d-d48a11c784c9
+
+	measure Accuracy = AVERAGE( Listings[review_scores_accuracy] )
+		lineageTag: bca14ecc-2d31-4f81-8ace-bd56933c1003
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Cleanliness = AVERAGE(Listings[review_scores_cleanliness] )
+		lineageTag: c6499565-0275-4865-b427-5034fde33ad1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure location = AVERAGE( Listings[review_scores_location] )
+		lineageTag: 394016a5-f3e0-4efa-a26d-715c59d9f5e8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Value = AVERAGE(Listings[review_scores_value] )
+		lineageTag: 790add97-b9b6-43de-81e2-2b13d4c32599
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Revivewers' = COUNT(Reviews[reviewer_id])
+		formatString: 0
+		lineageTag: c4a3b42e-4a39-4df4-9220-639de58d3fdc
+
+	measure 'Total Hosts' = DISTINCTCOUNT(Listings[host_id])
+		formatString: 0
+		lineageTag: 3b075f3e-311e-414c-aa1e-a291238bd30e
+
+	measure 'Listings per host' = DIVIDE([Total Listings], [Total Hosts])
+		formatString: 0.00
+		lineageTag: 4edda8b9-a588-4565-b804-cdb14e2015f9
+
+	measure 'Top 3 City Listings Share %' =
+			VAR CityTable =
+			    ADDCOLUMNS(
+			        ALLSELECTED(Listings[city]),
+			        "@Listings", CALCULATE([Total Listings])
+			    )
+			VAR TopCities =
+			    TOPN(
+			        3,
+			        CityTable,
+			        [@Listings], DESC,
+			        Listings[city], ASC
+			    )
+			VAR Top3Listings =
+			    SUMX(TopCities, [@Listings])
+			VAR AllCityListings =
+			    CALCULATE(
+			        [Total Listings],
+			        ALLSELECTED(Listings[city])
+			    )
+			RETURN
+			    DIVIDE(Top3Listings, AllCityListings)
+		lineageTag: aee40b4c-24aa-412b-9b30-83cd61dc70f8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column listing_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6fae975e-f9d2-4368-b094-54f05c72c414
+		summarizeBy: none
+		sourceColumn: listing_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: cc19a83e-78bb-462b-b846-fb01f2f073ff
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column host_id
+		dataType: int64
+		formatString: 0
+		lineageTag: bd4b67cb-269d-48af-a810-38aa6b330ef4
+		summarizeBy: sum
+		sourceColumn: host_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column host_since
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 46d6f4b8-ca95-48c6-be68-4788526cc3c3
+		summarizeBy: none
+		sourceColumn: host_since
+
+		variation Variation
+			isDefault
+			relationship: 4c3a92a3-ed73-44f0-9dbd-ee93681673f9
+			defaultHierarchy: LocalDateTable_15336349-f7e1-4509-8e31-8da5118bab82.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column host_location
+		dataType: string
+		lineageTag: 9f3f772c-503a-4c3a-a73a-171177715776
+		summarizeBy: none
+		sourceColumn: host_location
+
+		annotation SummarizationSetBy = Automatic
+
+	column host_response_time
+		dataType: string
+		lineageTag: 98981ba4-da0c-4390-a1fd-afa3b0e77632
+		summarizeBy: none
+		sourceColumn: host_response_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column host_response_rate
+		dataType: string
+		lineageTag: 7cf6a364-936c-49de-b03b-55d275f829f1
+		summarizeBy: none
+		sourceColumn: host_response_rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column host_acceptance_rate
+		dataType: string
+		lineageTag: 9d746cde-f8ae-49c4-a8d1-0e6e13dcb8b7
+		summarizeBy: none
+		sourceColumn: host_acceptance_rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column host_is_superhost
+		dataType: string
+		lineageTag: a3b0e4f3-f0c4-4ae2-a3b3-df8fe48f77f0
+		summarizeBy: none
+		sourceColumn: host_is_superhost
+
+		annotation SummarizationSetBy = Automatic
+
+	column host_total_listings_count
+		dataType: int64
+		formatString: 0
+		lineageTag: cd2c038e-8f38-4a42-bbc5-90099ca70570
+		summarizeBy: sum
+		sourceColumn: host_total_listings_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column host_has_profile_pic
+		dataType: string
+		lineageTag: 10f9c12e-f403-4ef0-9a2c-da880389c807
+		summarizeBy: none
+		sourceColumn: host_has_profile_pic
+
+		annotation SummarizationSetBy = Automatic
+
+	column host_identity_verified
+		dataType: string
+		lineageTag: d53f93b3-4531-42ce-ae44-a5376b411ca0
+		summarizeBy: none
+		sourceColumn: host_identity_verified
+
+		annotation SummarizationSetBy = Automatic
+
+	column neighbourhood
+		dataType: string
+		lineageTag: f129f2cc-38d6-4fb0-8a5c-dd4c5b0c3c16
+		summarizeBy: none
+		sourceColumn: neighbourhood
+
+		annotation SummarizationSetBy = Automatic
+
+	column district
+		dataType: string
+		lineageTag: 3fb2e9b9-c888-49b7-ad44-0d1c33015fb3
+		summarizeBy: none
+		sourceColumn: district
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 19ed3d5b-1329-4482-ab14-14fe66aa4bf9
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		lineageTag: c4205963-7531-43e6-bf52-da9a91a02be8
+		summarizeBy: sum
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		lineageTag: 54fcf538-cb64-449e-9517-14da9884a772
+		summarizeBy: sum
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column property_type
+		dataType: string
+		lineageTag: ab59bc07-9a8b-4e33-8fad-9907e8f807fc
+		summarizeBy: none
+		sourceColumn: property_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column room_type
+		dataType: string
+		lineageTag: f1469561-f30f-42a0-9321-00631f7d6219
+		summarizeBy: none
+		sourceColumn: room_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column accommodates
+		dataType: int64
+		formatString: 0
+		lineageTag: 7b83628a-bf5b-41e6-a8e3-a87d3a6e3bdd
+		summarizeBy: sum
+		sourceColumn: accommodates
+
+		annotation SummarizationSetBy = Automatic
+
+	column bedrooms
+		dataType: int64
+		formatString: 0
+		lineageTag: 1249ffeb-35a8-48c0-907a-799a66cf4b0a
+		summarizeBy: sum
+		sourceColumn: bedrooms
+
+		annotation SummarizationSetBy = Automatic
+
+	column amenities
+		dataType: string
+		lineageTag: 5bd82911-e7eb-43fd-9c4c-e9142685e854
+		summarizeBy: none
+		sourceColumn: amenities
+
+		annotation SummarizationSetBy = Automatic
+
+	column price
+		dataType: int64
+		formatString: 0
+		lineageTag: a640beee-ca38-4b2a-ae57-371324991f0b
+		summarizeBy: sum
+		sourceColumn: price
+
+		annotation SummarizationSetBy = Automatic
+
+	column minimum_nights
+		dataType: int64
+		formatString: 0
+		lineageTag: 62ff3bda-e11e-4501-8191-3725cf922c7a
+		summarizeBy: sum
+		sourceColumn: minimum_nights
+
+		annotation SummarizationSetBy = Automatic
+
+	column maximum_nights
+		dataType: int64
+		formatString: 0
+		lineageTag: 971d51ee-b86a-4a92-9a1e-7bbb6932e2e7
+		summarizeBy: sum
+		sourceColumn: maximum_nights
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_scores_rating
+		dataType: int64
+		formatString: 0
+		lineageTag: 7891e62d-5092-4620-adc6-d890c29ec947
+		summarizeBy: sum
+		sourceColumn: review_scores_rating
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_scores_accuracy
+		dataType: int64
+		formatString: 0
+		lineageTag: 260f3f88-719f-411a-a5dd-413047e0fa6e
+		summarizeBy: sum
+		sourceColumn: review_scores_accuracy
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_scores_cleanliness
+		dataType: int64
+		formatString: 0
+		lineageTag: e048c3ab-2523-4959-9103-2b410f54c6fb
+		summarizeBy: sum
+		sourceColumn: review_scores_cleanliness
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_scores_checkin
+		dataType: int64
+		formatString: 0
+		lineageTag: e9249d50-9fb6-4d9a-8217-f0aabcbcbdc5
+		summarizeBy: sum
+		sourceColumn: review_scores_checkin
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_scores_communication
+		dataType: int64
+		formatString: 0
+		lineageTag: 800320a1-bf2c-4c90-b547-eab4cf692852
+		summarizeBy: sum
+		sourceColumn: review_scores_communication
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_scores_location
+		dataType: int64
+		formatString: 0
+		lineageTag: 8d16e105-9545-4673-9d11-a89237424669
+		summarizeBy: sum
+		sourceColumn: review_scores_location
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_scores_value
+		dataType: int64
+		formatString: 0
+		lineageTag: 68afd651-5e75-463d-ae72-18e63d5b0929
+		summarizeBy: sum
+		sourceColumn: review_scores_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column instant_bookable
+		dataType: string
+		lineageTag: a77678ce-8ac2-40a8-bc6a-775db7ae46f8
+		summarizeBy: none
+		sourceColumn: instant_bookable
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Listings = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "Listings.csv"),[Delimiter=",", Columns=33, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"listing_id", Int64.Type}, {"name", type text}, {"host_id", Int64.Type}, {"host_since", type date}, {"host_location", type text}, {"host_response_time", type text}, {"host_response_rate", type text}, {"host_acceptance_rate", type text}, {"host_is_superhost", type text}, {"host_total_listings_count", Int64.Type}, {"host_has_profile_pic", type text}, {"host_identity_verified", type text}, {"neighbourhood", type text}, {"district", type text}, {"city", type text}, {"latitude", type number}, {"longitude", type number}, {"property_type", type text}, {"room_type", type text}, {"accommodates", Int64.Type}, {"bedrooms", Int64.Type}, {"amenities", type text}, {"price", Int64.Type}, {"minimum_nights", Int64.Type}, {"maximum_nights", Int64.Type}, {"review_scores_rating", Int64.Type}, {"review_scores_accuracy", Int64.Type}, {"review_scores_cleanliness", Int64.Type}, {"review_scores_checkin", Int64.Type}, {"review_scores_communication", Int64.Type}, {"review_scores_location", Int64.Type}, {"review_scores_value", Int64.Type}, {"instant_bookable", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,7 @@
+/// Folder that contains Listings.csv and Reviews.csv (must end with a backslash).
+/// Change it in Power BI Desktop: Transform data > Edit parameters.
+expression DataFolder = "C:\Users\harsh\Downloads\Airbnb+Data\Airbnb Data\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: c8a93b5a-3ac0-462c-91bc-0cd620505e9b
+
+	annotation PBI_ResultType = Text
+
